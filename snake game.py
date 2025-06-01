@@ -19,4 +19,11 @@ def main(stdscr):
     food = [random.randint(1, sh-2), random.randint(1, sw-2)]
     win.addch(food[0], food[1], curses.ACS_PI)
 
-    
+    # Initial direction
+    key = curses.KEY_RIGHT
+
+    while True:
+        next_key = win.getch()
+        key = key if next_key == -1 else next_key
+
+        

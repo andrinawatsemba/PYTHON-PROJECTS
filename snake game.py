@@ -40,4 +40,34 @@ def main(stdscr):
 
         new_head = [y, x]
 
-        
+        # Game over conditions
+        if (
+            y in [0, sh] or
+            x in [0, sw] or
+            new_head in snake
+        ):
+            msg = "Game Over! Press any key to exit."
+            win.addstr(sh//2, sw//2 - len(msg)//2, msg)
+            win.refresh()
+            win.getch()
+            break
+
+        snake.insert(0, new_head)
+
+        if new_head == food:
+            food = None
+            while food is None:
+                nf = [
+                    random.randint(1, sh-2),
+                    random.randint(1, sw-2)
+                ]
+                food = nf if nf not in snake else None
+            win.addch(food[0], food[1], curses.ACS_PI)
+        else:
+            tail = snake.pop()
+            win.addch(tail[0], tail[1], ' ')
+
+        win.addch(snake[0][0], snake[0][1], '#')
+
+if __name__ == "__main__":
+    curses.wrapper(main)

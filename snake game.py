@@ -26,4 +26,18 @@ def main(stdscr):
         next_key = win.getch()
         key = key if next_key == -1 else next_key
 
+        # Calculate new head
+        y = snake[0][0]
+        x = snake[0][1]
+        if key == curses.KEY_DOWN:
+            y += 1
+        elif key == curses.KEY_UP:
+            y -= 1
+        elif key == curses.KEY_LEFT:
+            x -= 1
+        elif key == curses.KEY_RIGHT:
+            x += 1
+
+        new_head = [y, x]
+
         
